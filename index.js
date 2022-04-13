@@ -9,7 +9,7 @@ const cliente = new Client({
   database: "Carros",
 });
 
-cliente.connect();
+//cliente.connect();
 cliente
   .query("select * from carros")
   .then((results) => {
@@ -18,11 +18,10 @@ cliente
   })
   .finally(() => cliente.end());
 
+getCarros();
+//insCarros("Hyudai", "HB20")
 
-//getCarros()
-insCarros("Hyudai", "HB20")
-
-/*async function getCarros() {
+async function getCarros() {
   try {
     console.log("Iniciando a conexão");
     await cliente.connect();
@@ -33,26 +32,27 @@ insCarros("Hyudai", "HB20")
     console.log("Ocorreu um erro no getCarros. Erro:" + ex);
   } finally {
     await cliente.end();
-    console.log("Cliente desconectado");
-  }
-}*/
-
-async function insCarros(marca, modelo) {
-  try {
-    console.log("Iniciando a conexão")
-    await cliente.connect()
-    console.log("Conexão bem sucedidada!")
-    await cliente.query('insert into carros("marca", "modelo") values('+"'" +marca +"', '" +modelo +"');")
-    console.log("Valor inserido na tabela")
-
-    const resultado = await cliente.query("select * from carros")
-    console.table(resultado.rows)
-  } 
-  catch (ex) {
-    console.log("Ocorreu um erro no insCarros. Erro:"+ ex)
-  } 
-  finally {
-    await cliente.end()
-    console.log("Cliente desconectado")
+    //console.log("Cliente desconectado");
   }
 }
+
+/*async function insCarros(marca, modelo) {
+  try {
+    console.log("Iniciando a conexão");
+    await cliente.connect();
+    console.log("Conexão bem sucedidada!");
+    await cliente.query('insert into carros("marca", "modelo") values('+"'" +marca +"', '" +modelo +"');");
+    console.log("Valor inserido na tabela");
+
+    const resultado = await cliente.query("select * from carros");
+    console.table(resultado.rows);
+  } 
+  catch (ex) {
+    console.log("Ocorreu um erro no insCarros. Erro:"+ ex);
+  } 
+  finally {
+    await cliente.end();
+    console.log("Cliente desconectado");
+  }
+}
+  */
