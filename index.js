@@ -20,8 +20,8 @@ cliente.query("select * from carros").then((results) => {
 //.finally(() => cliente.end());
 
 //getCarros();
-//insCarros( "Ferrari", "Z2");
-delCarro('Ferrari');
+//insCarros( "Ferrari", "Z5");
+delCarro('Z5');
 
 async function getCarros() {
   try {
