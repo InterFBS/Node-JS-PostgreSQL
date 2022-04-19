@@ -20,61 +20,67 @@ cliente.query("select * from carros").then((results) => {
 //.finally(() => cliente.end());
 
 //getCarros();
-//insCarros("Hyudai", "HB20")
-delCarro();
+//insCarros( "Ferrari", "Z2");
+delCarro('Ferrari');
 
-/*async function getCarros() {
+async function getCarros() {
   try {
     console.log("Iniciando a conexão");
     await cliente.connect();
     console.log("Conexão bem sucedidada!");
     const resultado = await cliente.query("select * from carros");
-    //console.table(resultado.rows);
+    console.table(resultado.rows);
   } catch (ex) {
     console.log("Ocorreu um erro no getCarros. Erro:" + ex);
   } finally {
-    //await cliente.end();
-    //console.log("Cliente desconectado");
+    console.log("Cliente desconectado");
   }
-}*/
-
-/*async function insCarros(marca, modelo) {
+}
+/*
+INSERIR
+*/
+async function insCarros(marca, modelo) {
   try {
     console.log("Iniciando a conexão");
     await cliente.connect();
     console.log("Conexão bem sucedida!");
-    await cliente.query('insert into carros("marca", "modelo") values('+"'" +marca +"', '" +modelo +"');");
+    await cliente.query(
+      'insert into carros("marca", "modelo") values(' +
+        "'" +
+        marca +
+        "', '" +
+        modelo +
+        "');"
+    );
     console.log("Valor inserido na tabela");
 
     const resultado = await cliente.query("select * from carros");
     console.table(resultado.rows);
-  } 
-  catch (ex) {
-    console.log("Ocorreu um erro no insCarros. Erro:"+ ex);
-  } 
-  finally {
+  } catch (ex) {
+    console.log("Ocorreu um erro no insCarros. Erro:" + ex);
+  } finally {
     await cliente.end();
     console.log("Cliente desconectado");
   }
 }
-  */
-
-async function delCarro(id) {
+/*
+DELETE
+*/
+async function delCarro (modelo) {
+  console.log();
   try {
     console.log("Iniciando a conexão");
     cliente.connect();
     console.log("Conexão bem sucedida!");
-    await cliente.query(`DELETE FROM Carros WHERE id = ${id};`);
-    console.log("Carro deletado " + id);
-    console.log("Item removido da tabela");
+    await cliente.query(`DELETE FROM public.carros
+    WHERE modelo = '${modelo}';`);
+    console.log("Item removido da tabela"+modelo);
 
     const resultado = await cliente.query("select * from carros");
     console.table(resultado.rows);
+  } catch {
+  } finally {
+    await cliente.end();
+    console.log("Cliente desconectado");
   }
-    catch {
-    } 
-    finally {
-      await cliente.end();
-      console.log("Cliente desconectado");
-    }
 }
