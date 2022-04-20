@@ -64,6 +64,9 @@ async function insCarros(marca, modelo) {
   }
 }
 /*
+UPDATE
+*/
+/*
 DELETE
 */
 async function delCarro (modelo) {
